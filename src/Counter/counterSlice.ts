@@ -37,7 +37,7 @@ export const counterSlice = createSlice({
   }
 })
 
-// export the actionsd created in the slice
+// export the actions created in the slice
 export const { increment, decrement, multiplyBy, incrementByAmount } = counterSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
