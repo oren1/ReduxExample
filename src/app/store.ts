@@ -1,11 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit'
 import counterSlice from '../Counter/counterSlice'
-// ...
+import { cryptoTopListApi } from '../CryptoApi/CryptoApi'
 
 const store = configureStore({
   reducer: {
+// Add the generated reducer as a specific top-level slice
+    [cryptoTopListApi.reducerPath]: cryptoTopListApi.reducer,
     counter: counterSlice
-  }
+  },
+  // Adding the api middleware enables caching, invalidation, polling,
+  // and other useful features of `rtk-query`.
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(cryptoTopListApi.middleware),
 })
 
 export default store

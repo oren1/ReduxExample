@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { useAppSelector, useAppDispatch } from './app/hooks'
 import { decrement, increment, multiplyBy, selectCount } from './Counter/counterSlice'
+import { useGetTopListQuery } from './CryptoApi/CryptoApi';
 
 function App() {
   // The `state` arg is correctly typed as `RootState` already
   const count = useAppSelector(selectCount)
   const dispatch = useAppDispatch()
-  // const 
+  const { data, error, isLoading } = useGetTopListQuery({limit: '10', tsym: 'USD'})
+
+  useEffect(() => {
+    console.log('error', error)
+    console.log('isLoading', isLoading)
+    console.log('data',data)
+  },[data,error,isLoading])
 
   return (
     <div className="App">
